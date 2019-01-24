@@ -1,0 +1,51 @@
+from subprocess import call
+
+cmd_line1 = "sudo lxc-attach --clear-env -n s1 -- bash -c \" 				\
+	yes S | sudo apt-get install npm;												\
+	npm install npm@latest -g;												\
+	git clone https://github.com/CORE-UPM/quiz_2019.git; 					\
+	cd /quiz_2019;												\
+	npm install;															\
+	npm install forever;													\
+	npm install mysql2;														\
+	export QUIZ_OPEN_REGISTER=yes; 											\
+	export DATABASE_URL=mysql://quiz:xxxx@20.2.4.31:3306/quiz;  			\
+	npm run-script migrate_cdps;											\
+	npm run-script seed_cdps;												\
+	./node_modules/forever/bin/forever start ./bin/www \""		
+
+call(cmd_line1,shell=True)
+
+call("sudo lxc-attach --clear-env -n s1 -- bash -c \"echo 'You have been connected to s1'> /quiz_2019/views/index.ejs\"",shell=True)
+
+cmd_line2 = "sudo lxc-attach --clear-env -n s2 -- bash -c \" 	\
+	yes S | sudo apt-get install npm;												\
+	npm install npm@latest -g;												\
+	git clone https://github.com/CORE-UPM/quiz_2019.git; 					\
+	cd /quiz_2019;												\
+	npm install;															\
+	npm install forever;													\
+	npm install mysql2;														\
+	export QUIZ_OPEN_REGISTER=yes; 											\
+	export DATABASE_URL=mysql://quiz:xxxx@20.2.4.31:3306/quiz;  			\
+	./node_modules/forever/bin/forever start ./bin/www \""		
+
+call(cmd_line2,shell=True)
+
+call("sudo lxc-attach --clear-env -n s2 -- bash -c \"echo 'You have been connected to s2'> /quiz_2019/views/index.ejs\"",shell=True)
+
+cmd_line3 = "sudo lxc-attach --clear-env -n s3 -- bash -c \" 	\
+	yes S | sudo apt-get install npm;												\
+	npm install npm@latest -g;												\
+	git clone https://github.com/CORE-UPM/quiz_2019.git; 					\
+	cd /quiz_2019;													\
+	npm install;															\
+	npm install forever;													\
+	npm install mysql2;														\
+	export QUIZ_OPEN_REGISTER=yes; 											\
+	export DATABASE_URL=mysql://quiz:xxxx@20.2.4.31:3306/quiz;  			\
+	./node_modules/forever/bin/forever start ./bin/www \""		
+
+call(cmd_line3,shell=True)
+
+call("sudo lxc-attach --clear-env -n s3 -- bash -c \"echo 'You have been connected to s3'> /quiz_2019/views/index.ejs\"",shell=True)

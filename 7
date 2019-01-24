@@ -1,0 +1,7 @@
+from subprocess import call
+
+call("sudo scp /home/upm/fw.fw /var/lib/lxc/fw/rootfs",shell=True)
+cmd_line="sudo lxc-attach --clear-env -n fw -- bash -c \"   \
+			chmod 744 fw.fw;     \
+			./fw.fw\""
+call(cmd_line,shell=True)

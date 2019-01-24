@@ -1,0 +1,9 @@
+from subprocess import call
+
+call("python3 1",shell=True)
+call("python3 2",shell=True)
+call("python3 3",shell=True)
+call("python3 4",shell=True)
+call("python3 5",shell=True)
+call("python3 6",shell=True)
+call("python3 7",shell=True)

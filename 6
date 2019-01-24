@@ -1,0 +1,29 @@
+from subprocess import call
+
+#opcion1 montado directamente
+#en el archivo4: mkdir public/uploads
+#call("sudo lxc-attach --clear-env -n s1 -- mount -t glusterfs 20.2.4.21:/nas /quiz_2019/public/uploads",shell=True)
+#call("sudo lxc-attach --clear-env -n s2 -- mount -t glusterfs 20.2.4.22:/nas /quiz_2019/public/uploads",shell=True)
+#call("sudo lxc-attach --clear-env -n s3 -- mount -t glusterfs 20.2.4.23:/nas /quiz_2019/public/uploads",shell=True)
+
+#opcion2 mediante enlaces simbolicos (por defecto)
+
+cmd_line1 = "sudo lxc-attach --clear-env -n s1 -- bash -c \" 	\
+		mkdir /mnt/nas;\
+		mount -t glusterfs 20.2.4.21:/nas /mnt/nas\" "	
+
+cmd_line2 = "sudo lxc-attach --clear-env -n s2 -- bash -c \" 	\
+		mkdir /mnt/nas;\
+		mount -t glusterfs 20.2.4.22:/nas /mnt/nas\" "
+
+cmd_line3 = "sudo lxc-attach --clear-env -n s3 -- bash -c \" 	\
+		mkdir /mnt/nas;\
+		mount -t glusterfs 20.2.4.23:/nas /mnt/nas\" "		
+
+call(cmd_line1,shell=True)
+call(cmd_line2,shell=True)
+call(cmd_line3,shell=True)
+
+call(" sudo lxc-attach --clear-env -n s1 -- bash -c \"cd /quiz_2019/public; ln -s /mnt/nas uploads; \" ",shell = True)
+call(" sudo lxc-attach --clear-env -n s2 -- bash -c \"cd /quiz_2019/public; ln -s /mnt/nas uploads; \" ",shell = True)
+call(" sudo lxc-attach --clear-env -n s3 -- bash -c \"cd /quiz_2019/public; ln -s /mnt/nas uploads; \" ",shell = True)

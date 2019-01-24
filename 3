@@ -1,0 +1,13 @@
+from subprocess import call
+
+cmd_line1 = "sudo lxc-attach --clear-env -n nas1 -- bash -c \" 	\
+		gluster peer probe 20.2.4.22;\
+		gluster peer probe 20.2.4.23;\
+		gluster volume create nas replica 3 20.2.4.21:/nas 20.2.4.22:/nas 20.2.4.23:/nas force;\
+		gluster volume start nas;\
+		gluster volume set nas network.ping-timeout 5\" "
+	
+call(cmd_line1,shell=True)
+call("sudo lxc-attach --clear-env -n nas2 -- gluster volume set nas network.ping-timeout 5",shell=True)
+call("sudo lxc-attach --clear-env -n nas3 -- gluster volume set nas network.ping-timeout 5",shell=True)
+

@@ -1,0 +1,8 @@
+from subprocess import call
+import os
+
+call("wget http://idefix.dit.upm.es/cdps/pfinal/pfinal.tgz",shell=True)
+call("sudo vnx --unpack pfinal.tgz",shell=True)
+os.chdir("pfinal")
+call("bin/prepare-pfinal-vm",shell=True)
+call("sudo vnx -f pfinal.xml --create",shell=True)
