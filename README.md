@@ -12,7 +12,7 @@ Se utilizan scripts escritos en Python para la puesta en marcha de una base de d
     - Cambiarse a **cd /home/upm**
     - Ejecutar el comando **python3 0** 
 
-
+*NOTA: utilizar VNX o similar*
 
 # Cómo desplegarlo en AWS (Amazon Web Service)
 
