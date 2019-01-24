@@ -16,6 +16,8 @@ Se utilizan scripts escritos en Python para la puesta en marcha de una base de d
 
 # Cómo desplegarlo en AWS (Amazon Web Service)
 
+![aws-screenshot](https://user-images.githubusercontent.com/36509669/51670770-a2b16b00-1fc7-11e9-92bd-edb7b5ca5288.JPG)
+
 -	Crear un VPC (Amazon Virtual Private Cloud) en la sección your VPC (lo llamaremos “MyVPC”). Esto lo hacemos para definir nuestra network.
     -	Dentro metemos subnets, creamos de la siguiente forma 3: 
         -	3 subnet pública: LAN1, LAN2 y LAN3 (las daremos la IP 20.2.1.0/24, 20.2.2.0/24 y 20.2.3.0/24 respectivamente) y que será donde pondremos los servidores webs. Esto lo hacemos así para asegurarnos alta disponibilidad.
