@@ -1,6 +1,6 @@
 # Scripts-Despliegue_App
 
-# Despliegue de una aplicación escalable.
+### Despliegue de una aplicación escalable.
 
 Se utilizan scripts en python para la puesta en marcha de una base de datos, tres discos de almacenamiento (NAS), tres servidores, un balanceador de carga y la configuración del firewall.
 
