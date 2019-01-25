@@ -4,7 +4,7 @@
 
 ![pfinal-screenshot](https://user-images.githubusercontent.com/36509669/51669685-44838880-1fc5-11e9-9f1f-91dc1a646921.JPG)
 
-Se utilizan scripts escritos en Python para la puesta en marcha de una base de datos, tres discos de almacenamiento (NAS), tres servidores, un balanceador de carga y la configuración del firewall (se ejecuta para éste último un Shell-script, se le llama desde 7.py).
+Se utilizan scripts escritos en Python para la puesta en marcha tal y como se muestra arriba en la imagen: una base de datos, tres discos de almacenamiento (NAS), tres servidores, un balanceador de carga y la configuración del firewall.
 
 ### Pasos a seguir:
 - Guardar todos los archivos en /home/upm
@@ -16,6 +16,24 @@ Se utilizan scripts escritos en Python para la puesta en marcha de una base de d
 
 ### Sobre el código...
 Básicamente se utiliza *call* para ejecutar comandos. Todos los comandos se ejecutan desde el host, sin necesidad de entrar a cada máquina virtual.
+
+- **0.py** para ejecutar el resto de scripts
+- **1.py** descargar, descomprimir y arrancar el escenario
+- **2.py** se accede a la máquina virtual de la base de datos como `sudo lxc-attach --clear-env -n bbdd` , en ella se crea un usuario y contraseña (quiz:xxxx) y la base de datos con nombre *quiz*
+- **3.py** creación del gluster desde nas1, conectividad con el resto, creación de un nas con replica 3 veces y forzado (force). Se pone un timeout para que la recuperación ante pérdidas sea más flexible
+- **4.py** se despliegan los 3 servidores en background con *forever*. Nos bajamos el repositorio de github y exportamos las variables de tipo (process.env) para utilizar la base de datos anteriormente mencionada. Con echo y un > reemplzamos lo que hubiese contenido en `/quiz_2019/views/index.ejs`, con el objetivo de visualizar mejorar , a qué servidor el balanceador de carga nos redirecciona.
+- **5.py** se instala haproxy, se para apache2, se introducen lineas al final del fichero haproxy.cfg (con echo y dos >>)
+
+        `echo ' server s1 20.2.3.11:3000 check weight 50'>> 
+         echo ' server s2 20.2.3.12:3000 check weight 50'>> 
+         echo ' server s3 20.2.3.13:3000 backup'>> /etc/haproxy/haproxy.cfg\"",shell=True)`
+ 
+ nos redirecciona a 3 servidores, utilizando Roundrobin con pesos (50/50) y uno de backup en caso de que ambos fallen.
+ 
+ - **6.py** se montan los glusters con enlaces simbólicos (por defecto)
+ - **7.py** se copia el fichero fw.fw dentro de la máquina del fw. Se aplica chmod para cambiar los privilegios. Finalmente se llama el shell-script
+
+*NOTA: \ algunos son para escapar comillas y otros para no ejecutar todo el código en una linea entera (para mejorar la legibilidad)*
 
 # Cómo desplegarlo en AWS (Amazon Web Service)
 
