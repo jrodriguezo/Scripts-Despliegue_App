@@ -64,4 +64,5 @@ Hay que tener mucho cuidado de que se puede acceder entonces desde internet: pro
         -	Action Allow
         -   NOTA: y como última regla como siempre: al resto de casos * denegar el servicio
 
-
+# Código
+Básicamente se utiliza *call* para ejecutar comandos. Todos los comandos se ejecutan desde el host, sin necesidad de entrar a cada máquina virtual.
