@@ -14,6 +14,9 @@ Se utilizan scripts escritos en Python para la puesta en marcha de una base de d
 
 *NOTA: utilizar VNX o similar*
 
+### Sobre el código...
+Básicamente se utiliza *call* para ejecutar comandos. Todos los comandos se ejecutan desde el host, sin necesidad de entrar a cada máquina virtual.
+
 # Cómo desplegarlo en AWS (Amazon Web Service)
 
 ![aws-screenshot](https://user-images.githubusercontent.com/36509669/51670770-a2b16b00-1fc7-11e9-92bd-edb7b5ca5288.JPG)
@@ -64,5 +67,3 @@ Hay que tener mucho cuidado de que se puede acceder entonces desde internet: pro
         -	Action Allow
         -   NOTA: y como última regla como siempre: al resto de casos * denegar el servicio
 
-# Código
-Básicamente se utiliza *call* para ejecutar comandos. Todos los comandos se ejecutan desde el host, sin necesidad de entrar a cada máquina virtual.
